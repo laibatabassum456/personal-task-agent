@@ -2,7 +2,18 @@ import streamlit as st
 import subprocess
 import sys
 import json
+# ---------------------------
+# Load Tasks Function
+# ---------------------------
 
+def load_tasks():
+
+    try:
+        with open("Backend/tasks.json", "r") as file:
+            return json.load(file)
+
+    except:
+        return []
 
 st.set_page_config(
     page_title="AI Personal Task Agent",
@@ -14,7 +25,64 @@ st.set_page_config(
 st.title("🤖 AI Personal Task Agent")
 st.write("Manage your tasks using natural language.")
 
+# ---------------------------
+# SIDEBAR DASHBOARD
+# ---------------------------
 
+tasks = load_tasks()
+
+total_tasks = len(tasks)
+
+completed_tasks = len(
+    [
+        t for t in tasks
+        if t.get("status") == "Completed"
+    ]
+)
+
+pending_tasks = total_tasks - completed_tasks
+
+high_priority = len(
+    [
+        t for t in tasks
+        if t.get("priority") == "High"
+    ]
+)
+
+
+with st.sidebar:
+
+    st.header("📊 Dashboard")
+
+    st.metric(
+        "📋 Total Tasks",
+        total_tasks
+    )
+
+    st.metric(
+        "⏳ Pending",
+        pending_tasks
+    )
+
+    st.metric(
+        "✅ Completed",
+        completed_tasks
+    )
+
+    st.metric(
+        "🔥 High Priority",
+        high_priority
+    )
+
+    st.divider()
+
+    st.write(
+        "AI Personal Task Agent"
+    )
+
+    st.caption(
+        "Powered by Groq + Streamlit"
+    )
 # ---------------------------
 # Function to run AI Agent
 # ---------------------------
