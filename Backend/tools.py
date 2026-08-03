@@ -126,7 +126,7 @@ search_task_schema = {
 
 def add_task(task, priority="Medium"):
 
-    file_name = "tasks.json"
+    file_name = "Backend/tasks.json"
 
     if os.path.exists(file_name):
         with open(file_name, "r") as file:
@@ -145,32 +145,17 @@ def add_task(task, priority="Medium"):
 
     return f"Task '{task}' added successfully."
 def view_tasks():
-
-    file_name = "tasks.json"
+    file_name = "Backend/tasks.json"
 
     if not os.path.exists(file_name):
-        return "No tasks found."
+        return []
 
     with open(file_name, "r") as file:
-        tasks = json.load(file)
-
-    if len(tasks) == 0:
-        return "Your task list is empty."
-
-    output = "📋 Your Tasks\n\n"
-
-    for i, task in enumerate(tasks, start=1):
-        output += (
-            f"{i}. {task['task']}\n"
-            f"Priority: {task['priority']}\n"
-            f"Status: {task['status']}\n\n"
-        )
-
-    return output
+        return json.load(file)
 
 def complete_task(task):
 
-    file_name = "tasks.json"
+    file_name = "Backend/tasks.json"
 
     if not os.path.exists(file_name):
         return "No tasks found."
@@ -199,7 +184,7 @@ def complete_task(task):
         return f"Task '{task}' not found."
 def delete_task(task):
 
-    file_name = "tasks.json"
+    file_name = "Backend/tasks.json"
 
     if not os.path.exists(file_name):
         return "No tasks found."
@@ -218,7 +203,7 @@ def delete_task(task):
     return f"Task '{task}' deleted successfully."
 def search_task(keyword):
 
-    file_name = "tasks.json"
+    file_name = "Backend/tasks.json"
 
     if not os.path.exists(file_name):
         return "No tasks found."

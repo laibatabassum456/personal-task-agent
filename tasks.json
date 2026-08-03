@@ -1,6 +1,13 @@
 [
     {
+        "id": 1,
         "task": "Complete SNA assignment",
+        "priority": "High",
+        "completed": false,
+        "due_date": "Tomorrow"
+    },
+    {
+        "task": "Complete SNA assignment tomorrow",
         "priority": "Medium",
         "status": "Pending"
     }

@@ -5,17 +5,12 @@
         "status": "Completed"
     },
     {
-        "task": "string",
-        "priority": "Medium",
+        "task": "Prepare Web Technologies assignment tomorrow",
+        "priority": "High",
         "status": "Pending"
     },
     {
-        "task": "string",
-        "priority": "Medium",
-        "status": "Pending"
-    },
-    {
-        "task": "string",
+        "task": "Viva",
         "priority": "Medium",
         "status": "Pending"
     }
