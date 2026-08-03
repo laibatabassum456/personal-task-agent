@@ -74,13 +74,27 @@ with st.sidebar:
         high_priority
     )
 
-    st.divider()
+progress = (
+    completed_tasks / total_tasks
+    if total_tasks > 0 else 0
+)
 
-    st.write(
+st.sidebar.subheader("📈 Progress")
+
+st.sidebar.progress(progress)
+
+st.sidebar.write(
+    f"{completed_tasks}/{total_tasks} Tasks Completed"
+)
+
+
+st.divider()
+
+st.write(
         "AI Personal Task Agent"
     )
 
-    st.caption(
+st.caption(
         "Powered by Groq + Streamlit"
     )
 # ---------------------------
@@ -106,15 +120,6 @@ def run_agent(command):
 # ---------------------------
 # Load Tasks
 # ---------------------------
-
-def load_tasks():
-
-    try:
-        with open("Backend/tasks.json", "r") as file:
-            return json.load(file)
-
-    except:
-        return []
 
 
 # ---------------------------
@@ -147,8 +152,6 @@ if option == "-- Select an option --":
     st.info(
         "👋 Welcome! Please select an action from the menu above."
     )
-
-
 elif option == "➕ Add Task":
 
     task = st.text_input(
@@ -158,33 +161,33 @@ elif option == "➕ Add Task":
 
     priority = st.selectbox(
         "Priority",
-        [
-            "High",
-            "Medium",
-            "Low"
-        ]
+        ["High", "Medium", "Low"]
     )
-
 
     if st.button("Create Task"):
 
         if task.strip():
 
-            command = (
-            f"Add {priority} priority task: {task}"
-        )
+            command = f"Add {priority} priority task: {task}"
 
-        response = run_agent(command)
+            response = run_agent(command)
 
-        st.subheader("Assistant")
-        st.code(response)
+            st.subheader("Assistant")
+            st.code(response)
 
-    else:
-        st.warning("Please enter a task first.")
+            # Refresh the page so the new task appears immediately
+            st.rerun()
+
+        else:
+            st.warning("Please enter a task first.")
 
 
 
 # ---------------------------
+# VIEW TASKS
+# ---------------------------
+
+ # ---------------------------
 # VIEW TASKS
 # ---------------------------
 
@@ -194,52 +197,102 @@ elif option == "📋 View Tasks":
 
     tasks = load_tasks()
 
-
     if not tasks:
-
         st.info("🎯 No tasks yet! Add your first task.")
 
     else:
 
-        for task in tasks:
+        # Filter
+        filter_option = st.selectbox(
+            "Filter Tasks",
+            [
+                "All",
+                "Pending",
+                "Completed",
+                "High Priority"
+            ]
+        )
+
+        filtered_tasks = tasks
+
+        if filter_option == "Pending":
+            filtered_tasks = [
+                t for t in tasks
+                if t.get("status") == "Pending"
+            ]
+
+        elif filter_option == "Completed":
+            filtered_tasks = [
+                t for t in tasks
+                if t.get("status") == "Completed"
+            ]
+
+        elif filter_option == "High Priority":
+            filtered_tasks = [
+                t for t in tasks
+                if t.get("priority") == "High"
+            ]
+
+        # Show every task
+        for task in filtered_tasks:
 
             with st.container(border=True):
 
-                st.markdown(
-                    f"### 📝 {task['task']}"
-                )
+                st.markdown(f"### 📝 {task['task']}")
 
                 col1, col2 = st.columns(2)
-
 
                 with col1:
                     st.write(
                         f"⭐ Priority: {task.get('priority','Medium')}"
                     )
 
+                    st.write(
+                        f"📅 Due: {task.get('due_date','Not specified')}"
+                    )
 
                 with col2:
 
-                    status = task.get(
-                        "status",
-                        "Pending"
-                    )
+                    status = task.get("status","Pending")
 
                     if status == "Completed":
-                        st.success(
-                            "✅ Completed"
-                        )
-
+                        st.success("✅ Completed")
                     else:
-                        st.warning(
-                            "⏳ Pending"
+                        st.warning("⏳ Pending")
+
+                action_col1, action_col2 = st.columns(2)
+
+                with action_col1:
+
+                    if status != "Completed":
+
+                        if st.button(
+                            "✅ Complete",
+                            key=f"complete_{task['task']}"
+                        ):
+
+                            run_agent(
+                                f"Complete task {task['task']}"
+                            )
+
+                            st.rerun()
+
+                with action_col2:
+
+                    if st.button(
+                        "🗑 Delete",
+                        key=f"delete_{task['task']}"
+                    ):
+
+                        run_agent(
+                            f"Delete task {task['task']}"
                         )
 
+                        st.rerun()
 
 # ---------------------------
 # COMPLETE TASK
 # ---------------------------
-
 elif option == "✅ Complete Task":
 
     tasks = load_tasks()
