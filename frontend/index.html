@@ -1,0 +1,64 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <title>Personal Task Agent</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🤖 Personal Task Dashboard</h1>
+
+    <div class="add-box">
+
+        <input id="taskInput" placeholder="Enter task">
+
+        <select id="priority">
+            <option>High</option>
+            <option>Medium</option>
+            <option>Low</option>
+        </select>
+
+        <button onclick="addTask()">
+            Add Task
+        </button>
+
+    </div>
+
+
+    <h2>Your Tasks</h2>
+
+<div id="taskList"></div>
+
+<hr>
+
+<h2>🤖 AI Assistant</h2>
+
+<div class="agent-box">
+
+    <input
+        type="text"
+        id="agentInput"
+        placeholder="Ask your AI assistant..."
+    >
+
+    <button onclick="askAgent()">
+        Send
+    </button>
+
+</div>
+
+<div id="response" class="response-box">
+
+</div>
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

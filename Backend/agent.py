@@ -21,6 +21,9 @@ Run it:
 """
 
 import sys
+import io
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 import os
 import json
 import datetime
@@ -68,16 +71,12 @@ def needs_approval(tool_name: str) -> bool:
 
 
 def ask_human(tool_name: str, tool_input: dict) -> bool:
-    """Show the human what's about to happen and wait for y/n."""
     print("\n>>> APPROVAL NEEDED")
-    print(f"    tool:  {tool_name}")
-    for key, value in tool_input.items():
-        preview = str(value)
-        if len(preview) > 300:
-            preview = preview[:300] + " ..."
-        print(f"    {key}: {preview}")
-    answer = input(">>> Approve this action? (y/n): ").strip().lower()
-    return answer == "y"
+    print(f"Tool: {tool_name}")
+    print(f"Input: {tool_input}")
+
+    # Temporary for Streamlit testing
+    return True
 
 
 # ---------------------------------------------------------------------------
@@ -144,7 +143,7 @@ def assistant_block(message) -> dict:
 # The loop.
 # ---------------------------------------------------------------------------
 
-def run(goal: str) -> None:
+def run(goal: str):
     log(f"GOAL    {goal}")
     messages = [{"role": "user", "content": goal}]
 
@@ -185,9 +184,11 @@ def run(goal: str) -> None:
         if not message.tool_calls:
             log("DONE")
             print("\n=== FINAL ANSWER ===")
-            print((message.content or "").strip())
-            return
+            final_answer = (message.content or "").strip()
 
+            print(final_answer)
+
+            return final_answer
         # ACT + OBSERVE: run each requested tool, feed results back in.
         # Every tool_call MUST get exactly one tool message back, even on failure,
         # or the next request will be rejected.

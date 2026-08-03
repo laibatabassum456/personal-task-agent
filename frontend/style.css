@@ -1,0 +1,146 @@
+ body {
+
+    font-family: Arial, sans-serif;
+    background:#f1f5f9;
+
+}
+
+
+.container {
+
+    width:800px;
+    margin:50px auto;
+
+}
+
+
+h1 {
+
+    text-align:center;
+
+}
+
+
+
+.add-box {
+
+    background:white;
+    padding:20px;
+    border-radius:15px;
+
+    display:flex;
+    gap:10px;
+
+}
+
+
+input, select {
+
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #ddd;
+
+}
+
+
+
+button {
+
+    background:#2563eb;
+    color:white;
+
+    border:none;
+    padding:12px 20px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+
+
+button:hover {
+
+    background:#1d4ed8;
+
+}
+
+
+
+.task-card {
+
+    background:white;
+
+    margin-top:15px;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+
+.priority {
+
+    font-size:14px;
+
+}
+
+
+.status {
+
+    padding:5px 10px;
+
+    border-radius:20px;
+
+}
+
+
+
+.completed {
+
+    background:#dcfce7;
+
+}
+
+
+
+.pending {
+
+    background:#fef3c7;
+
+}
+
+
+.actions button {
+
+    margin-left:5px;
+
+}
+.agent-box {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.agent-box input {
+    flex: 1;
+    padding: 10px;
+}
+
+.response-box {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    min-height: 60px;
+    white-space: pre-wrap;
+}

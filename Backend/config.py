@@ -31,11 +31,10 @@ MAX_TOKENS = 4096
 # Everything else must be approved before it runs.
 # Rule of thumb: reading/searching is safe; sending/deleting/spending is not.
 AUTO_APPROVE = {
-    "research",    # only reads/looks things up -> safe
-    "save_note",   # writes only inside the notes/ folder -> safe enough
-    # "send_email" is deliberately NOT here -> it will require your approval.
+    "add_task",
+    "view_tasks",
+    "search_task"
 }
-
 # Where things land.
 NOTES_DIR = "notes"
 LOG_DIR = "logs"

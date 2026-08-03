@@ -1,0 +1,12 @@
+20:43:42  GOAL    Show all my tasks
+20:43:42  --- turn 1 / 8 ---
+20:43:42  CALL    view_tasks({})
+20:43:42  RESULT  📋 Your Tasks
+
+1. Complete AI Assignment
+Priority: High
+Status: Pending
+
+
+20:43:42  --- turn 2 / 8 ---
+20:44:02  DONE

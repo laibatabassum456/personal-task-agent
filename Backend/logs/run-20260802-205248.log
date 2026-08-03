@@ -1,0 +1,12 @@
+20:52:48  GOAL    Search task AI
+20:52:48  --- turn 1 / 8 ---
+20:52:48  CALL    search_task({'keyword': 'AI'})
+20:52:48  RESULT  🔍 Matching Tasks
+
+1. Study AI
+Priority: High
+Status: Pending
+
+
+20:52:48  --- turn 2 / 8 ---
+20:52:49  DONE

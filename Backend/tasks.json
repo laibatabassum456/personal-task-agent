@@ -1,0 +1,22 @@
+[
+    {
+        "task": "Study AI",
+        "priority": "High",
+        "status": "Completed"
+    },
+    {
+        "task": "string",
+        "priority": "Medium",
+        "status": "Pending"
+    },
+    {
+        "task": "string",
+        "priority": "Medium",
+        "status": "Pending"
+    },
+    {
+        "task": "string",
+        "priority": "Medium",
+        "status": "Pending"
+    }
+]
