@@ -21,4 +21,4 @@ An AI-powered task management assistant that allows users to create and manage t
 
 ## Live Demo
 
-https://your-streamlit-url.streamlit.app
+https://personal-task-agent-kq5csvdbgzjk8qo9uwvqwx.streamlit.app/
