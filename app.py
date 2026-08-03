@@ -197,26 +197,43 @@ elif option == "📋 View Tasks":
 
     if not tasks:
 
-        st.info("No tasks found.")
+        st.info("🎯 No tasks yet! Add your first task.")
 
     else:
 
         for task in tasks:
 
-            st.container(border=True)
+            with st.container(border=True):
 
-            st.markdown(
-                f"### 📝 {task['task']}"
-            )
+                st.markdown(
+                    f"### 📝 {task['task']}"
+                )
 
-            st.write(
-                f"⭐ Priority: {task.get('priority','Medium')}"
-            )
+                col1, col2 = st.columns(2)
 
-            st.write(
-                f"Status: {task.get('status','Pending')}"
-            )
 
+                with col1:
+                    st.write(
+                        f"⭐ Priority: {task.get('priority','Medium')}"
+                    )
+
+
+                with col2:
+
+                    status = task.get(
+                        "status",
+                        "Pending"
+                    )
+
+                    if status == "Completed":
+                        st.success(
+                            "✅ Completed"
+                        )
+
+                    else:
+                        st.warning(
+                            "⏳ Pending"
+                        )
 
 
 # ---------------------------
