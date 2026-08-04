@@ -53,6 +53,11 @@ add_task_schema = {
                 "priority": {
                     "type": "string",
                     "description": "Task priority: High, Medium or Low."
+                },
+                
+                "due_date": {
+                    "type": "string",
+                    "description": "The due date of the task if mentioned by the user."
                 }
             },
             "required": ["task"]
@@ -124,22 +129,38 @@ search_task_schema = {
     }
 }
 
-def add_task(task, priority="Medium"):
+def add_task(task, priority="Medium", due_date="Not specified"):
 
     file_name = "Backend/tasks.json"
 
+    # Load existing tasks
     if os.path.exists(file_name):
         with open(file_name, "r") as file:
-            tasks = json.load(file)
+            try:
+                tasks = json.load(file)
+            except json.JSONDecodeError:
+                tasks = []
     else:
         tasks = []
 
-    tasks.append({
+    # Generate a unique ID
+    if tasks:
+        new_id = max(t.get("id", 0) for t in tasks) + 1
+    else:
+        new_id = 1
+
+    # Create the new task
+    new_task = {
+        "id": new_id,
         "task": task,
         "priority": priority,
-        "status": "Pending"
-    })
+        "status": "Pending",
+        "due_date": due_date
+    }
 
+    tasks.append(new_task)
+
+    # Save updated tasks
     with open(file_name, "w") as file:
         json.dump(tasks, file, indent=4)
 

@@ -1,17 +1,44 @@
 [
     {
+        "id": 1,
         "task": "Study AI",
         "priority": "High",
-        "status": "Completed"
+        "status": "Completed",
+        "due_date": "2026-08-04"
     },
     {
+        "id": 2,
         "task": "Prepare Web Technologies assignment tomorrow",
         "priority": "High",
-        "status": "Pending"
+        "status": "Pending",
+        "due_date": "2026-08-09"
     },
     {
+        "id": 3,
         "task": "Viva",
         "priority": "Medium",
-        "status": "Pending"
+        "status": "Completed",
+        "due_date": "2026-08-15"
+    },
+    {
+        "id": 4,
+        "task": "database",
+        "priority": "Low",
+        "status": "Completed",
+        "due_date": "Not specified"
+    },
+    {
+        "id": 5,
+        "task": "lab",
+        "priority": "High",
+        "status": "Pending",
+        "due_date": "2026-08-11"
+    },
+    {
+        "id": 6,
+        "task": "math test",
+        "priority": "Medium",
+        "status": "Pending",
+        "due_date": "2026-08-04"
     }
 ]
